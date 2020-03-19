@@ -109,7 +109,8 @@ const HTML_BOX = `<div class="a-color-picker-row a-color-picker-stack a-color-pi
                             <label>HEX</label>
                             <input nameref="RGBHEX" type="text" select-on-focus>
                         </div>
-                        <div class="a-color-picker-row a-color-picker-palette"></div>`;
+                        <div class="a-color-picker-row a-color-picker-palette"></div>
+                        <div class="a-color-picker-note">Use shift + click to remove colour</div>`;
 
 function parseElement(element, defaultElement, fallToDefault) {
     if (!element) {
@@ -346,6 +347,10 @@ class ColorPicker {
                 this.alphaPointer = this.element.querySelector('.a-color-picker-a+.a-color-picker-dot');
             } else {
                 this.element.querySelector('.a-color-picker-alpha').remove();
+            }
+
+            if (!this.options.paletteEditable) {
+                this.element.querySelector('.a-color-picker-note').remove();
             }
             // imposto il colore iniziale
             this.onValueChanged(COLOR, this.options.color);
